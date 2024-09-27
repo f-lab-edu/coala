@@ -14,6 +14,10 @@ export type Coin = {
 };
 
 export default async function Home() {
+  /* page 로딩시 Suspense로 감쌀수 없음, 그래서 NextJs에서는 loading.tsx를 사용하여 page를 Suspense로 감쌈.
+   * layout, page, laoding, error 등등 알아보기.
+   * TODO: https://nextjs.org/docs/app/api-reference/file-conventions 참고하기
+   * */
   const coins = await fetchCoins();
 
   return (
