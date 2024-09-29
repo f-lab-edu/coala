@@ -1,4 +1,5 @@
 export default function TotalBalance() {
+  // TODO 내 계좌 정보 api 연동 내 정보랑 같이 받아오는게 나을지?
   return (
     <div className="mb-6">
       <h3 className="text-gray-500">Total balance</h3>

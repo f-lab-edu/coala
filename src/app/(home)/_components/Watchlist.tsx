@@ -3,7 +3,12 @@ import { Coin } from '../page';
 import { CoinIcon } from '@/_components/Icons';
 import Link from 'next/link';
 
-// TODO 관심 코인, 구매한 코인 구분하여 보여주기
+// TODO 관심 코인, 구매한 코인 구분하여 보여준다. - Tabs
+
+// TODO: 상태 관리 추가
+// fetchCoins 함수로 받은 코인을 필터링하여 상태를 관리?
+// 관심 코인과 구매코인 데이터를 백엔드에서 분리해서 가져올 수 있으면 더 효율적일듯
+
 export default async function Watchlist() {
   const coins = await fetchCoins();
 

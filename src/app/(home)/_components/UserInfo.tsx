@@ -1,4 +1,6 @@
 export default function UserInfo() {
+  // profile 페이지에서도 쓰일 예정
+  // TODO 유저 정보 api 연동
   return (
     <div className="mb-6 flex items-center space-x-4">
       <div className="avatar">
