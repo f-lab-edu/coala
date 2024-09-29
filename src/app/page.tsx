@@ -1,3 +1,9 @@
+/** 여기에 use server를 안써도 되는 이유는 기본값이 항상 server component이기 때문,
+ * 원한다면 page.tsx를 'use client' directive를 이용해서 client component로 사용할수 있음.
+ * 만약 page.tsx가 client component면 이 page component의 모든 자식은 client component가 되고,
+ * 자식중 일부를 server component로 바꾸고 싶으면 바꾸고 싶은 component에 'use server'를 사용해 주면됨.
+ * */
+import { fetchCoins } from '@/_actions/coin/getCoins.action';
 import Card from '@/_components/card';
 
 export type Coin = {
@@ -7,28 +13,13 @@ export type Coin = {
   symbol: string;
 };
 
-const coins: Coin[] = [
-  {
-    name: 'Bitcoin',
-    img: 'https://www.cryptocompare.com/media/19633/btc.png',
-    price: 10000,
-    symbol: 'BTC',
-  },
-  {
-    name: 'Ethereum',
-    img: 'https://www.cryptocompare.com/media/20646/eth_logo.png',
-    price: 400,
-    symbol: 'ETH',
-  },
-  {
-    name: 'Litecoin',
-    img: 'https://www.cryptocompare.com/media/35309662/ltc.png',
-    price: 100,
-    symbol: 'LTC',
-  },
-];
+export default async function Home() {
+  /* page 로딩시 Suspense로 감쌀수 없음, 그래서 NextJs에서는 loading.tsx를 사용하여 page를 Suspense로 감쌈.
+   * layout, page, laoding, error 등등 알아보기.
+   * TODO: https://nextjs.org/docs/app/api-reference/file-conventions 참고하기
+   * */
+  const coins = await fetchCoins();
 
-export default function Home() {
   return (
     <div className="mx-auto flex flex-wrap gap-4">
       {coins.map((coin) => (
