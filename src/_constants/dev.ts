@@ -1,22 +1,33 @@
-import { Coin } from '@/app/page';
+import { Coin } from '@/app/(home)/page';
 
 export const coins: Coin[] = [
   {
-    name: 'Bitcoin',
-    img: 'https://www.cryptocompare.com/media/19633/btc.png',
-    price: 10000,
+    // ava
+    logo: 'https://www.cryptocompare.com/media',
+    symbol: 'AVA',
+    name: 'Avalanche',
+    price: 1_267.15,
+    change: 18.43,
+  },
+  {
+    logo: '',
+    symbol: 'BNC',
+    name: 'Binance Coin',
+    price: 867.0,
+    change: -1.88,
+  },
+  {
+    logo: 'https://www.cryptocompare.com/media/19633/btc.png',
     symbol: 'BTC',
+    name: 'Bitcoin',
+    price: 2_267.54,
+    change: 40.93,
   },
   {
-    name: 'Ethereum',
-    img: 'https://www.cryptocompare.com/media/20646/eth_logo.png',
-    price: 400,
+    logo: 'https://www.cryptocompare.com/media/19633/btc.png',
     symbol: 'ETH',
-  },
-  {
-    name: 'Litecoin',
-    img: 'https://www.cryptocompare.com/media/35309662/ltc.png',
-    price: 100,
-    symbol: 'LTC',
+    name: 'Ethereum',
+    price: 1_867.15,
+    change: 18.43,
   },
 ];
