@@ -1,5 +1,5 @@
 import { NavItem } from './BottomNavItem';
-import { AssetsIcon, HomeIcon, ProfileIcon, TradeIcon } from './Icons/icons';
+import { AssetsIcon, HomeIcon, ProfileIcon, TradeIcon } from './Icons';
 
 export default function BottomNav() {
   return (
