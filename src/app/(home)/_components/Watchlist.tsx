@@ -22,9 +22,8 @@ export default async function Watchlist() {
           <span className="h-2 w-2 rounded-full bg-black"></span>
         </div>
       </div>
-      {/* Coins List */}
       <div className="space-y-4">
-        {coins.map((coin: Coin) => (
+        {coins.map((coin) => (
           <CoinItem key={coin.symbol} {...coin} />
         ))}
       </div>
@@ -32,7 +31,7 @@ export default async function Watchlist() {
   );
 }
 
-function CoinItem({ logo, symbol, name, price, change }: any) {
+function CoinItem({ symbol, name, price, change }: Coin) {
   const changeClass = change > 0 ? 'text-green-500' : 'text-red-500';
 
   return (

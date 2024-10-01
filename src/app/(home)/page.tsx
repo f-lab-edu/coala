@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import ActionButtons from './_components/ActionButtons';
 import TotalBalance from './_components/TotalBalance';
 import UserInfo from './_components/UserInfo';
 import Watchlist from './_components/Watchlist';
+import CoinListSkeleton from '@/_components/skeleton/CoinListSkeleton';
 
 export type Coin = {
   name: string;
@@ -21,7 +23,9 @@ export default async function Home() {
       <UserInfo />
       <TotalBalance />
       <ActionButtons />
-      <Watchlist />
+      <Suspense fallback={<CoinListSkeleton />}>
+        <Watchlist />
+      </Suspense>
     </div>
   );
 }
