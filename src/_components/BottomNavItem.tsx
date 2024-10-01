@@ -2,14 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ComponentProps, ReactNode } from 'react';
 
-type NavItemProps = {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-};
+type Props = ComponentProps<typeof Link> & { icon: ReactNode };
 
-export function NavItem({ href, icon, label }: NavItemProps) {
+export function NavLink({ href, icon, children }: Props) {
   const pathname = usePathname();
 
   const isActive = pathname === href;
@@ -17,7 +14,7 @@ export function NavItem({ href, icon, label }: NavItemProps) {
   return (
     <Link href={href} className={isActive ? 'active' : ''}>
       {icon}
-      <span className="btm-nav-label">{label}</span>
+      <span className="btm-nav-label">{children}</span>
     </Link>
   );
 }
