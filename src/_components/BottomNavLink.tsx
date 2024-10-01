@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ComponentProps, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
-type Props = ComponentProps<typeof Link> & { icon: ReactNode };
+type Props = ComponentPropsWithoutRef<typeof Link> & { icon: ReactNode; children: string };
 
 export function NavLink({ href, icon, children }: Props) {
   const pathname = usePathname();

@@ -1,4 +1,4 @@
-import { NavLink } from './BottomNavItem';
+import { NavLink } from './BottomNavLink';
 import { AssetsIcon, HomeIcon, ProfileIcon, TradeIcon } from './Icons';
 
 export default function BottomNav() {
