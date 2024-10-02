@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
-type Props = ComponentPropsWithoutRef<typeof Link> & { icon: ReactNode; children: string };
+type Props = Omit<ComponentPropsWithoutRef<typeof Link>, 'children'> & { icon: ReactNode; children: string };
 
 export function NavLink({ href, icon, children }: Props) {
   const pathname = usePathname();
