@@ -11,6 +11,7 @@ export type Coin = {
   price: number;
   symbol: string;
   change: number;
+  isBookmarked: boolean;
 };
 
 export default async function Home() {

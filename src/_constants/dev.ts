@@ -8,6 +8,7 @@ export const coins: Coin[] = [
     name: 'Avalanche',
     price: 1_267.15,
     change: 18.43,
+    isBookmarked: false,
   },
   {
     logo: '',
@@ -15,6 +16,7 @@ export const coins: Coin[] = [
     name: 'Binance Coin',
     price: 867.0,
     change: -1.88,
+    isBookmarked: true,
   },
   {
     logo: 'https://www.cryptocompare.com/media/19633/btc.png',
@@ -22,6 +24,7 @@ export const coins: Coin[] = [
     name: 'Bitcoin',
     price: 2_267.54,
     change: 40.93,
+    isBookmarked: false,
   },
   {
     logo: 'https://www.cryptocompare.com/media/19633/btc.png',
@@ -29,5 +32,6 @@ export const coins: Coin[] = [
     name: 'Ethereum',
     price: 1_867.15,
     change: 18.43,
+    isBookmarked: false,
   },
 ];
