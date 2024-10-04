@@ -10,7 +10,7 @@ export default function ActionButtons() {
       <button
         className="btn btn-neutral btn-lg w-full rounded-lg"
         onClick={() => {
-          router.push('/trade/buy');
+          router.push('/exchange/buy');
         }}
       >
         <CoinIcon />
@@ -19,7 +19,7 @@ export default function ActionButtons() {
       <button
         className="btn btn-primary btn-lg w-full rounded-lg"
         onClick={() => {
-          router.push('/trade/sell');
+          router.push('/exchange/sell');
         }}
       >
         <MoneyIcon />

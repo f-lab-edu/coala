@@ -7,7 +7,7 @@ export default function BottomNav() {
       <NavLink href="/" icon={<HomeIcon />}>
         홈
       </NavLink>
-      <NavLink href="/trade" icon={<TradeIcon />}>
+      <NavLink href="/exchange" icon={<TradeIcon />}>
         거래소
       </NavLink>
       <NavLink href="/profile" icon={<ProfileIcon />}>
