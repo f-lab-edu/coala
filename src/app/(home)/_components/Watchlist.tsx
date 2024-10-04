@@ -1,31 +1,52 @@
+'use client';
 import { fetchCoins } from '@/_actions/coin/getCoins.action';
 import { Coin } from '../page';
 import { CoinIcon } from '@/_components/Icons';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 // TODO 관심 코인, 구매한 코인 구분하여 보여준다. - Tabs
 
-// TODO: 상태 관리 추가
-// fetchCoins 함수로 받은 코인을 필터링하여 상태를 관리?
-// 관심 코인과 구매코인 데이터를 백엔드에서 분리해서 가져올 수 있으면 더 효율적일듯
+export default function Watchlist() {
+  const [coins, setCoins] = useState<Coin[]>([]);
+  const [activeTab, setActiveTab] = useState<'favorite' | 'owned'>('favorite');
+  const [favoriteCoins, setFavoriteCoins] = useState<Coin[]>([]);
+  const [ownedCoins, setOwnedCoins] = useState<Coin[]>([]);
 
-export default async function Watchlist() {
-  const coins = await fetchCoins();
+  useEffect(() => {
+    // 코인 데이터를 fetch하고 필터링
+    const fetchData = async () => {
+      const allCoins = await fetchCoins();
+      setCoins(allCoins);
+
+      // 관심 코인과 구매 코인 필터링 TODO 백엔드?
+      setFavoriteCoins(allCoins);
+      setOwnedCoins(allCoins.filter((coin) => coin.name === 'Bitcoin' || coin.name === 'Ethereum'));
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="rounded-lg bg-gray-50 p-4 shadow-inner">
-      <div className="mb-4 flex items-center justify-between">
-        <h4 className="font-semibold">Watchlist</h4>
-        <div className="flex space-x-1">
-          <span className="h-2 w-2 rounded-full bg-black"></span>
-          <span className="h-2 w-2 rounded-full bg-black"></span>
-          <span className="h-2 w-2 rounded-full bg-black"></span>
-        </div>
+      <div className="mb-4 flex items-center justify-between"></div>
+      <div className="tabs tabs-bordered">
+        <button
+          className={`tab ${activeTab === 'favorite' ? 'tab-active' : ''}`}
+          onClick={() => setActiveTab('favorite')}
+        >
+          관심있는 코인
+        </button>
+        <button className={`tab ${activeTab === 'owned' ? 'tab-active' : ''}`} onClick={() => setActiveTab('owned')}>
+          보유한 코인
+        </button>
       </div>
-      <div className="space-y-4">
-        {coins.map((coin) => (
-          <CoinItem key={coin.symbol} {...coin} />
-        ))}
+
+      {/* Tab Content */}
+      <div className="mt-4 space-y-4">
+        {activeTab === 'favorite' && favoriteCoins.map((coin) => <CoinItem key={coin.symbol} {...coin} />)}
+
+        {activeTab === 'owned' && ownedCoins.map((coin) => <CoinItem key={coin.symbol} {...coin} />)}
       </div>
     </div>
   );

@@ -1,20 +1,17 @@
 import { NavLink } from './BottomNavLink';
-import { AssetsIcon, HomeIcon, ProfileIcon, TradeIcon } from './Icons';
+import { HomeIcon, ProfileIcon, TradeIcon } from './Icons';
 
 export default function BottomNav() {
   return (
     <div className="btm-nav btm-nav-sm mx-auto max-w-[600px]">
       <NavLink href="/" icon={<HomeIcon />}>
-        Home
-      </NavLink>
-      <NavLink href="/assets" icon={<AssetsIcon />}>
-        Assets
+        홈
       </NavLink>
       <NavLink href="/trade" icon={<TradeIcon />}>
-        Trade
+        거래소
       </NavLink>
       <NavLink href="/profile" icon={<ProfileIcon />}>
-        Profile
+        프로필
       </NavLink>
     </div>
   );
