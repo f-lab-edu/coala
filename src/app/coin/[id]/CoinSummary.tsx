@@ -65,7 +65,7 @@ export function CoinSummary({ coinName, className }: Props) {
       </div>
 
       {/* TODO 보유 코인이 없는 경우 판매하기 버튼 숨김 / 로그인 안 된 경우 전부 숨김  */}
-      <div className="fixed bottom-12 left-0 right-0 mx-auto mt-16 flex max-w-[600px] justify-around bg-white bg-opacity-60 p-4 pt-16 shadow-sm">
+      <div className="fixed bottom-12 left-0 right-0 mx-auto mt-16 flex max-w-[600px] justify-around bg-white bg-opacity-60 p-4 pt-8 shadow-sm">
         <button className="btn btn-primary w-5/12 rounded-md py-2 text-white">구매하기</button>
         <button className="btn btn-neutral w-5/12 rounded-md py-2 text-white">판매하기</button>
         <button className="btn w-1/12 rounded-md p-1">
