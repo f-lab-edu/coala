@@ -1,36 +1,31 @@
 'use client';
-import { usePathname } from 'next/navigation';
+import { PAGE_NAMES } from '@/_constants/pageNames';
+import { usePathname, useRouter, useSelectedLayoutSegments } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { ArrowLeftIcon } from './Icons';
 
-// TODO 상단에 고정시켜야 할듯.
 export default function Navbar() {
-  const pathName = usePathname();
+  const router = useRouter();
+  const pathname = usePathname();
+  const layoutSegments = useSelectedLayoutSegments();
+  const [canGoBack, setCanGoBack] = useState(false);
 
-  // Todo customhook
-  const pathSegments = pathName.split('/');
-  const lastSegment = pathSegments[pathSegments.length - 1];
+  useEffect(() => {
+    setCanGoBack(pathname !== '/');
+  }, [pathname]);
 
-  let currentPageName = '';
-  if (pathName === '/') {
-    currentPageName = 'Coala';
-  } else if (pathName.startsWith('/exchange')) {
-    currentPageName = '거래소';
-  } else if (pathName.startsWith('/coin')) {
-    currentPageName = lastSegment;
-  } else if (pathName.startsWith('/profile')) {
-    currentPageName = '프로필';
-  }
+  const currentPageName = PAGE_NAMES[pathname] || layoutSegments.pop();
 
   return (
-    <div className="navbar mb-1 bg-base-100">
+    <div className="navbar fixed left-0 right-0 top-0 z-50 mx-auto max-w-[600px]">
       <div className="navbar-start">
-        {/* history 존재할때만... / router 객체에서 받아올 수 있는지?   */}
-        <button className="btn btn-circle btn-ghost" onClick={() => window.history.back()}>
-          <ArrowLeftIcon />
-        </button>
+        {canGoBack && (
+          <button className="btn btn-circle btn-ghost" onClick={() => router.back()}>
+            <ArrowLeftIcon />
+          </button>
+        )}
       </div>
       <div className="navbar-center cursor-default">
-        {/* 현재 페이지 이름 표시 */}
         <span className="text-lg font-bold">{currentPageName}</span>
       </div>
       <div className="navbar-end"></div>
