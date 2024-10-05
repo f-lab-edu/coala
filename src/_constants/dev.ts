@@ -35,3 +35,15 @@ export const coins: Coin[] = [
     isBookmarked: false,
   },
 ];
+
+export const timePeriods = [
+  { label: '1일', value: '1d' },
+  { label: '1주', value: '1w' },
+  { label: '3달', value: '3m' },
+  { label: '1년', value: '1y' },
+];
+
+export const orders = [
+  { id: 1, date: '10월01일', type: 'buy', amount: '1.5 BTC', price: '$60,000' },
+  { id: 2, date: '09월15일', type: 'sell', amount: '0.5 BTC', price: '$20,000' },
+];

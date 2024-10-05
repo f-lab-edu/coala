@@ -15,10 +15,19 @@ export async function CoinById({ coinId }: Props) {
   const coin = await fetchCoinById(coinId);
 
   return (
-    <div className="SomeLayout">
-      <div className="SomeLayout2">
-        <CoinSummary coinName={coin.name} className="User Interaction은 전부 이 component안에서 해결" />
+    <div className="container mx-auto max-w-screen-sm p-4">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold">비트코인 (BTC)</h1>
+        <p>
+          <span className="text-xl font-semibold">$40,000</span>
+          <span className="text-sm text-gray-500"> (₩50,000,000)</span>
+        </p>
+        <p className="text-md text-green-500">
+          <span className="font-semibold">+5.32%</span>
+        </p>
       </div>
+      {/* User Interaction은 전부 이 component안에서 해결" */}
+      <CoinSummary coinName={coin.name} />
     </div>
   );
 }
