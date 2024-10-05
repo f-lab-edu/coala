@@ -23,7 +23,7 @@ export default async function Home() {
     <div>
       <UserInfo />
       <TotalBalance />
-      <ActionButtons />
+      {/* <ActionButtons /> */}
       <Suspense fallback={<CoinListSkeleton />}>
         <Watchlist />
       </Suspense>

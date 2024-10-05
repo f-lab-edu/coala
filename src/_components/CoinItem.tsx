@@ -16,7 +16,7 @@ export function CoinItem({ symbol, name, price, change, isBookmarked }: Coin) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-2">
-        <button onClick={handleBookmarkClick} className="text-xl text-yellow-400">
+        <button onClick={handleBookmarkClick} className={`text-xl ${bookmarked ? 'text-yellow-500' : 'text-gray-400'}`}>
           <StarIcon solid={bookmarked} />
         </button>
         <Link href={`/coin/${symbol}`} className="flex items-center space-x-2">
