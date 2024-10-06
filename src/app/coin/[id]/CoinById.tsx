@@ -15,7 +15,7 @@ export async function CoinById({ coinId }: Props) {
   const coin = await fetchCoinById(coinId);
 
   return (
-    <div className="container mx-auto max-w-screen-sm p-4">
+    <div className="mx-auto max-w-screen-sm">
       <div className="mb-6">
         <h1 className="text-3xl font-bold">비트코인 (BTC)</h1>
         <p>

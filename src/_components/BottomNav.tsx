@@ -3,7 +3,7 @@ import { HomeIcon, ProfileIcon, TradeIcon } from './Icons';
 
 export default function BottomNav() {
   return (
-    <div className="btm-nav btm-nav-sm mx-auto max-w-[600px]">
+    <div className="btm-nav btm-nav-sm sticky mx-auto max-w-[600px]">
       <NavLink href="/" icon={<HomeIcon />}>
         홈
       </NavLink>
