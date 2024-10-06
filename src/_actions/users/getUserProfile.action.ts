@@ -16,6 +16,6 @@ export async function getUserProfileAction() {
       id, email, picture
     FROM users
     WHERE id = ${userId}
-  `) as Array<{ id: string; email: string }>;
+  `) as Array<{ id: string; email: string; picture: string }>;
   return user;
 }
