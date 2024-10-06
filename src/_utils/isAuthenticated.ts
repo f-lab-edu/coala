@@ -8,7 +8,8 @@ export function isAuthenticated() {
   try {
     const decodedToken = verify(token, process.env.JWT_PRIVATE_KEY);
     return !!decodedToken;
-  } catch (error) {
+  } catch (e) {
+    console.log(`JWT verification failed: ${e}`);
     return false;
   }
 }
