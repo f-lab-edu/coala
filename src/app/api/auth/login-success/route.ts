@@ -33,13 +33,17 @@ export async function GET(request: NextRequest) {
     const googleUserProfile = await response.json();
     const providerId = googleUserProfile.id;
     const providerEmail = googleUserProfile.email;
+    const providerPicture = googleUserProfile.picture;
 
     const sql = neon(process.env.DATABASE_URL);
     const [result] = (await sql`
-      INSERT INTO users (email, google_id)
-      VALUES (${providerEmail}, ${providerId})
+      INSERT INTO users (email, google_id, picture)
+      VALUES (${providerEmail}, ${providerId}, ${providerPicture})
       ON CONFLICT (email) 
-      DO UPDATE SET google_id = EXCLUDED.google_id
+      DO UPDATE SET
+        google_id = EXCLUDED.google_id,
+        picture = EXCLUDED.picture,
+        email = EXCLUDED.email
       RETURNING *
     `) as Array<{ id: string; email: string }>;
     if (result == null) {
