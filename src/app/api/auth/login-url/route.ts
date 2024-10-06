@@ -1,4 +1,5 @@
 import { getGoogleAuthClient } from '@/_utils/auth';
+import { serverErrorHandler } from '@/_utils/serverErrorHandler';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
@@ -11,7 +12,7 @@ export async function GET() {
 
     return NextResponse.redirect(googleAuthLoginUrl);
   } catch (e) {
-    console.log(`TODO: handle error`, e);
+    serverErrorHandler(e, 'Failed to get google auth login url');
   }
 }
 

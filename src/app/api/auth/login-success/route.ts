@@ -1,6 +1,7 @@
 import { APP_DOMAIN } from '@/_constants/urls';
 import { getGoogleAuthClient } from '@/_utils/auth';
 import { parseSearchParams } from '@/_utils/parseSearchParams';
+import { serverErrorHandler } from '@/_utils/serverErrorHandler';
 import { signToken } from '@/_utils/signToken.server';
 import { neon } from '@neondatabase/serverless';
 import { cookies } from 'next/headers';
@@ -53,6 +54,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(`${APP_DOMAIN}`);
   } catch (e) {
-    console.log(`TODO: handle error`, e);
+    serverErrorHandler(e, 'Error during Google OAuth login process');
   }
 }
