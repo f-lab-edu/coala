@@ -1,9 +1,9 @@
 import { APP_DOMAIN } from '@/_constants/urls';
-import { getGoogleAuthClient } from '@/_utils/auth';
+import { getAccessToken } from '@/_utils/auth';
+import { sql } from '@/_utils/db';
 import { parseSearchParams } from '@/_utils/parseSearchParams';
 import { serverErrorHandler } from '@/_utils/serverErrorHandler';
 import { signToken } from '@/_utils/signToken.server';
-import { neon } from '@neondatabase/serverless';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -15,9 +15,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: 'code is empty' }, { status: 400 });
     }
 
-    const googleAuthClient = getGoogleAuthClient();
-    const { tokens } = await googleAuthClient.getToken(code);
-    const accessToken = tokens.access_token;
+    const accessToken = await getAccessToken(code);
 
     const response = await fetch('https://www.googleapis.com/oauth2/v1/userinfo', {
       headers: {
@@ -32,7 +30,6 @@ export async function GET(request: NextRequest) {
     const providerEmail = googleUserProfile.email;
     const providerPicture = googleUserProfile.picture;
 
-    const sql = neon(process.env.DATABASE_URL);
     const [result] = (await sql`
       INSERT INTO users (email, google_id, picture)
       VALUES (${providerEmail}, ${providerId}, ${providerPicture})
