@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { APP_DOMAIN } from '@/_constants/urls';
+import { getGoogleAuthClient } from '@/_utils/auth';
 import { parseSearchParams } from '@/_utils/parseSearchParams';
-import { OAuth2Client } from 'google-auth-library';
-import { neon } from '@neondatabase/serverless';
 import { signToken } from '@/_utils/signToken.server';
+import { neon } from '@neondatabase/serverless';
 import { cookies } from 'next/headers';
-import { APP_DOMAIN, GOOGLE_AUTH_LOGIN_SUCCESS_URL } from '@/_constants/urls';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
@@ -14,11 +14,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: 'code is empty' }, { status: 400 });
     }
 
-    const googleAuthClient = new OAuth2Client({
-      clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_AUTH_SECRET_KEY,
-      redirectUri: GOOGLE_AUTH_LOGIN_SUCCESS_URL,
-    });
+    const googleAuthClient = getGoogleAuthClient();
     const { tokens } = await googleAuthClient.getToken(code);
     const accessToken = tokens.access_token;
 
