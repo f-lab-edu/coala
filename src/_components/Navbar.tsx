@@ -17,7 +17,7 @@ export default function Navbar() {
   const currentPageName = PAGE_NAMES[pathname] || layoutSegments.pop();
 
   return (
-    <div className="navbar fixed left-0 right-0 top-0 z-50 mx-auto max-w-[600px]">
+    <div className="navbar fixed left-0 right-0 top-0 z-50 mx-auto max-w-[600px] bg-white">
       <div className="navbar-start">
         {canGoBack && (
           <button className="btn btn-circle btn-ghost" onClick={() => router.back()}>
