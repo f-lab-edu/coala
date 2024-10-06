@@ -1,10 +1,9 @@
-import { getGoogleAuthClient } from '@/_utils/auth';
+import { googleAuthClient } from '@/_utils/auth';
 import { serverErrorHandler } from '@/_utils/serverErrorHandler';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const googleAuthClient = getGoogleAuthClient();
     const googleAuthLoginUrl = googleAuthClient.generateAuthUrl({
       access_type: 'offline',
       scope: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'],

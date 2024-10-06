@@ -2,16 +2,13 @@ import { GOOGLE_AUTH_LOGIN_SUCCESS_URL, GOOGLE_USER_INFO_URL } from '@/_constant
 import { OAuth2Client } from 'google-auth-library';
 import { NextResponse } from 'next/server';
 
-export function getGoogleAuthClient() {
-  return new OAuth2Client({
-    clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,
-    clientSecret: process.env.GOOGLE_AUTH_SECRET_KEY!,
-    redirectUri: GOOGLE_AUTH_LOGIN_SUCCESS_URL,
-  });
-}
+export const googleAuthClient = new OAuth2Client({
+  clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,
+  clientSecret: process.env.GOOGLE_AUTH_SECRET_KEY!,
+  redirectUri: GOOGLE_AUTH_LOGIN_SUCCESS_URL,
+});
 
 export async function getGoogleToken(code: string) {
-  const googleAuthClient = getGoogleAuthClient();
   const { tokens } = await googleAuthClient.getToken(code);
 
   return tokens.access_token;
