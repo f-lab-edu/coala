@@ -5,6 +5,7 @@ import UserInfo from './_components/UserInfo';
 import Watchlist from './_components/Watchlist';
 import CoinListSkeleton from '@/_components/skeleton/CoinListSkeleton';
 import { LoginButton } from '@/_components/Buttons/LogInButton';
+import { isAuthenticated } from '@/_utils/isAuthenticated';
 
 export type Coin = {
   name: string;
@@ -13,21 +14,23 @@ export type Coin = {
   symbol: string;
   change: number;
 };
-
 export default async function Home() {
-  /* page 로딩시 Suspense로 감쌀수 없음, 그래서 NextJs에서는 loading.tsx를 사용하여 page를 Suspense로 감쌈.
-   * layout, page, laoding, error 등등 알아보기.
-   * TODO: https://nextjs.org/docs/app/api-reference/file-conventions 참고하기
-   * */
+  const isLoggedIn = isAuthenticated();
+
   return (
     <div>
-      <LoginButton />
-      <UserInfo />
-      <TotalBalance />
-      <ActionButtons />
-      <Suspense fallback={<CoinListSkeleton />}>
-        <Watchlist />
-      </Suspense>
+      {isLoggedIn ? (
+        <>
+          <UserInfo />
+          <TotalBalance />
+          <ActionButtons />
+          <Suspense fallback={<CoinListSkeleton />}>
+            <Watchlist />
+          </Suspense>
+        </>
+      ) : (
+        <LoginButton />
+      )}
     </div>
   );
 }
