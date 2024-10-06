@@ -1,5 +1,6 @@
-import { GOOGLE_AUTH_LOGIN_SUCCESS_URL } from '@/_constants/urls';
+import { GOOGLE_AUTH_LOGIN_SUCCESS_URL, GOOGLE_USER_INFO_URL } from '@/_constants/urls';
 import { OAuth2Client } from 'google-auth-library';
+import { NextResponse } from 'next/server';
 
 export function getGoogleAuthClient() {
   return new OAuth2Client({
@@ -9,9 +10,25 @@ export function getGoogleAuthClient() {
   });
 }
 
-export async function getAccessToken(code: string) {
+export async function getGoogleToken(code: string) {
   const googleAuthClient = getGoogleAuthClient();
   const { tokens } = await googleAuthClient.getToken(code);
 
   return tokens.access_token;
+}
+
+export async function getGoogleUserProfile(code: string) {
+  const accessToken = await getGoogleToken(code);
+
+  const response = await fetch(GOOGLE_USER_INFO_URL, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    return NextResponse.json({ message: 'no user info' }, { status: 400 });
+  }
+
+  return response.json();
 }

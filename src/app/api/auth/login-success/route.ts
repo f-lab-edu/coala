@@ -1,10 +1,10 @@
 import { APP_DOMAIN } from '@/_constants/urls';
-import { getAccessToken } from '@/_utils/auth';
+import { getGoogleUserProfile } from '@/_utils/auth';
+import { setAuthCookie } from '@/_utils/cookies';
 import { sql } from '@/_utils/db';
 import { parseSearchParams } from '@/_utils/parseSearchParams';
 import { serverErrorHandler } from '@/_utils/serverErrorHandler';
 import { signToken } from '@/_utils/signToken.server';
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
@@ -14,21 +14,9 @@ export async function GET(request: NextRequest) {
     if (code === '') {
       return NextResponse.json({ message: 'code is empty' }, { status: 400 });
     }
+    const profile = await getGoogleUserProfile(code);
 
-    const accessToken = await getAccessToken(code);
-
-    const response = await fetch('https://www.googleapis.com/oauth2/v1/userinfo', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    if (!response.ok) {
-      return NextResponse.json({ message: 'no user info' }, { status: 400 });
-    }
-    const googleUserProfile = await response.json();
-    const providerId = googleUserProfile.id;
-    const providerEmail = googleUserProfile.email;
-    const providerPicture = googleUserProfile.picture;
+    const { id: providerId, email: providerEmail, picture: providerPicture } = profile;
 
     const [result] = (await sql`
       INSERT INTO users (email, google_id, picture)
@@ -46,8 +34,7 @@ export async function GET(request: NextRequest) {
     const user_id = Number(result.id);
 
     const token = await signToken({ id: user_id });
-    const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-    cookies().set({ name: 'token', value: token, maxAge: ONE_YEAR_IN_SECS, path: '/', httpOnly: true });
+    setAuthCookie(token);
 
     return NextResponse.redirect(`${APP_DOMAIN}`);
   } catch (e) {
