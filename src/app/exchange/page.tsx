@@ -1,7 +1,7 @@
 import { CoinList } from '@/_components/CoinList';
 import { Coin } from '../(home)/page';
 import { fetchCoins } from '@/_actions/coin/getCoins.action';
-import { SearchIcon } from '@/_components/Icons';
+import { SearchIcon } from '@/_components/utils/Icons';
 
 export default async function Page() {
   const coins: Coin[] = await fetchCoins();

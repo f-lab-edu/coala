@@ -1,9 +1,9 @@
 'use client';
 
-import { StarIcon } from '@/_components/Icons';
+import { StarIcon } from '@/_components/utils/Icons';
 import { orders, timePeriods } from '@/_constants/dev';
 import { useState } from 'react';
-import { Modal } from '@/_components/Modal';
+import { Modal } from '@/_components/common/Modal';
 
 type Props = {
   coinName: string;

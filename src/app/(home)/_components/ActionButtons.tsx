@@ -1,5 +1,5 @@
 'use client';
-import { CoinIcon, MoneyIcon } from '@/_components/Icons';
+import { CoinIcon, MoneyIcon } from '@/_components/utils/Icons';
 import { useRouter } from 'next/navigation';
 
 export default function ActionButtons() {

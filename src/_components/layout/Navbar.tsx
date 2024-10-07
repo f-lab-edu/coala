@@ -2,7 +2,7 @@
 import { PAGE_NAMES } from '@/_constants/pageNames';
 import { usePathname, useRouter, useSelectedLayoutSegments } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ArrowLeftIcon } from './Icons';
+import { ArrowLeftIcon } from '../utils/Icons';
 
 export default function Navbar() {
   const router = useRouter();

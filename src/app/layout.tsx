@@ -1,8 +1,8 @@
 import localFont from 'next/font/local';
 import { ReactNode } from 'react';
 import './globals.css';
-import BottomNav from '@/_components/BottomNav';
-import Navbar from '@/_components/Navbar';
+import BottomNav from '@/_components/layout/BottomNav';
+import Navbar from '@/_components/layout/Navbar';
 
 const pretendard = localFont({
   src: '../../public/fonts/PretendardVariable.woff2',
