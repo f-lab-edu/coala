@@ -1,6 +1,8 @@
-import { GOOGLE_AUTH_LOGIN_SUCCESS_URL, GOOGLE_USER_INFO_URL } from '@/_constants/urls';
+import { GOOGLE_AUTH_LOGIN_SUCCESS_URL } from '@/_constants/urls';
 import { OAuth2Client } from 'google-auth-library';
 import { NextResponse } from 'next/server';
+
+const GOOGLE_USER_INFO_URL = 'https://www.googleapis.com/oauth2/v1/userinfo';
 
 export const googleAuthClient = new OAuth2Client({
   clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,
