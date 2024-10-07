@@ -1,26 +1,12 @@
 'use server';
 
+import { getLoggedInUserId } from '@/_utils/auth';
 import { sql } from '@/_utils/db';
-import { verify } from 'hono/jwt';
-import { cookies } from 'next/headers';
 
 export async function getUserProfileAction() {
-  const token = await getToken();
-  const { id: userId } = await verifyToken(token);
+  const userId = await getLoggedInUserId();
   const user = await getUserFromDB(userId);
   return user;
-}
-
-async function getToken() {
-  const token = cookies().get('token')?.value || '';
-  if (token === '') {
-    throw Error('Token not found');
-  }
-  return token;
-}
-
-async function verifyToken(token: string) {
-  return await verify(token, process.env.JWT_PRIVATE_KEY);
 }
 
 async function getUserFromDB(userId: string) {

@@ -1,5 +1,7 @@
 import { GOOGLE_AUTH_LOGIN_SUCCESS_URL } from '@/_constants/urls';
 import { OAuth2Client } from 'google-auth-library';
+import { verify } from 'hono/jwt';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 const GOOGLE_USER_INFO_URL = 'https://www.googleapis.com/oauth2/v1/userinfo';
@@ -30,4 +32,18 @@ export async function getGoogleUserProfile(code: string) {
   }
 
   return response.json();
+}
+
+async function getToken() {
+  const token = cookies().get('token')?.value || '';
+  if (token === '') {
+    throw Error('Token not found');
+  }
+  return token;
+}
+
+export async function getLoggedInUserId() {
+  const token = await getToken();
+  const { id } = await verify(token, process.env.JWT_PRIVATE_KEY);
+  return id;
 }
