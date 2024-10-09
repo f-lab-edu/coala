@@ -15,7 +15,7 @@ export type Coin = {
   change: number;
 };
 export default async function Home() {
-  const isLoggedIn = isAuthenticated();
+  const isLoggedIn = await isAuthenticated();
 
   return (
     <div>
