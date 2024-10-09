@@ -1,3 +1,4 @@
+'use server';
 import { verify } from 'hono/jwt';
 import { cookies } from 'next/headers';
 
@@ -7,7 +8,7 @@ export async function isAuthenticated() {
 
   try {
     const decodedToken = await verify(token, process.env.JWT_PRIVATE_KEY);
-    return !!decodedToken;
+    return decodedToken?.id != null;
   } catch (e) {
     console.log(`JWT verification failed: ${e}`);
     return false;
