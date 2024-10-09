@@ -4,6 +4,7 @@ import TotalBalance from './_components/TotalBalance';
 import UserInfo from './_components/UserInfo';
 import Watchlist from './_components/Watchlist';
 import CoinListSkeleton from '@/_components/skeleton/CoinListSkeleton';
+import { LoginButton } from '@/_components/Buttons/LogInButton';
 
 export type Coin = {
   name: string;
@@ -20,6 +21,7 @@ export default async function Home() {
    * */
   return (
     <div>
+      <LoginButton />
       <UserInfo />
       <TotalBalance />
       <ActionButtons />

@@ -1,5 +1,13 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## .env.local
+```bash
+JWT_PRIVATE_KEY="" # node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+DATABASE_URL=""
+GOOGLE_AUTH_CLIENT_ID=""
+GOOGLE_AUTH_SECRET_KEY=""
+```
+
 ## Getting Started
 
 First, run the development server:
