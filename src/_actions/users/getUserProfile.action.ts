@@ -1,16 +1,15 @@
 'use server';
 
-import { verify } from 'hono/jwt';
-import { cookies } from 'next/headers';
-import { neon } from '@neondatabase/serverless';
+import { getLoggedInUserId } from '@/_utils/auth';
+import { sql } from '@/_utils/db';
 
 export async function getUserProfileAction() {
-  const token = cookies().get('token')?.value || '';
-  if (token === '') {
-    throw Error('Token not found');
-  }
-  const { id: userId } = await verify(token, process.env.JWT_PRIVATE_KEY);
-  const sql = neon(process.env.DATABASE_URL);
+  const userId = await getLoggedInUserId();
+  const user = await getUserFromDB(userId);
+  return user;
+}
+
+async function getUserFromDB(userId: string) {
   const [user] = (await sql`
     SELECT
       id, email, picture
