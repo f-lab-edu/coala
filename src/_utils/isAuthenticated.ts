@@ -1,4 +1,4 @@
-'use server';
+import 'server-only';
 import { verify } from 'hono/jwt';
 import { cookies } from 'next/headers';
 
